@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>APP HEALTH</title>
+    <meta name="author" content="name" />
+    <meta name="description" content="description here" />
+    <meta name="keywords" content="keywords,here" />
+    <link rel="stylesheet" href="./style.css" />
+   
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet" />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+      integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis="
+      crossorigin="anonymous"
+    ></script>
+    <link href="./tailwind.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-gray-800 font-sans leading-normal tracking-normal mt-12">
+    <!--Nav header-->
+    <nav
+      class="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0"
+    >
+      <div class="flex flex-wrap items-center">
+        <div
+          class="flex flex-shrink md:w-2/5 justify-center md:justify-start text-white"
+        >
+          <a href="#">
+            <span class="text-4xl pl-2 ml-8"
+              ><i class="fas fa-medkit"></i
+            ></span>
+          </a>
+        </div>
+
+        <div
+          class="flex flex-1 md:w-1/3 justify-center md:justify-start text-white px-2"
+        >
+          <span
+            class="text-base sm:text-lg justify-end font-medium text-red-100"
+            >HỆ THỐNG THEO DÕI SỨC KHỎE</span
+          >
+          <span class="text-xl ml-3 text-red-500"
+            ><i class="fa fa-heart" aria-hidden="true"></i
+          ></span>
+        </div>
+        <div
+          class="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end"
+        >
+          <ul
+            class="list-reset flex justify-between flex-1 md:flex-none items-center"
+          >
+            <li class="flex-1 md:flex-none md:mr-3">
+              <a class="inline-block py-2 px-4 text-white no-underline" href="#"
+                >Active</a
+              >
+            </li>
+            <li class="flex-1 md:flex-none md:mr-3">
+              <a
+                class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+                href=""
+                >link</a
+              >
+            </li>
+            <li class="flex-1 md:flex-none md:mr-3">
+              <div class="relative inline-block">
+                <button
+                  onclick="toggleDD('myDropdown')"
+                  class="drop-button text-white focus:outline-none"
+                >
+                  <span class="pr-2"><i class="em em-robot_face"></i></span>
+                  ADMIN
+                  <svg
+                    class="h-3 fill-current inline"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                    />
+                  </svg>
+                </button>
+                <div
+                  id="myDropdown"
+                  class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible"
+                >
+                  <input
+                    type="text"
+                    class="drop-search p-2 text-gray-600"
+                    placeholder="Search.."
+                    id="myInput"
+                    onkeyup="filterDD('myDropdown','myInput')"
+                  />
+                  <a
+                    href="#"
+                    class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"
+                    ><i class="fa fa-user fa-fw"></i> Profile</a
+                  >
+                  <a
+                    href="#"
+                    class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"
+                    ><i class="fa fa-cog fa-fw"></i> Settings</a
+                  >
+                  <div class="border border-gray-800"></div>
+                  <a
+                    href="#"
+                    class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"
+                    ><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a
+                  >
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex flex-col md:flex-row">
+      <div
+        class="bg-gray-800 shadow-xl h-16 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48"
+      >
+        <div
+          class="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between"
+        >
+          <ul
+            class="list-reset flex flex-row md:flex-col py-0 md:py-3 px-1 md:px-2 text-center md:text-left"
+          >
+            <li class="mr-3 flex-1">
+              <a
+                href="#"
+                class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600"
+              >
+                <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i
+                ><span
+                  class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block"
+                  >main page</span
+                >
+              </a>
+            </li>
+            <li class="mr-3 flex-1">
+              <a
+                href="#"
+                class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500"
+              >
+                <i class="fas fa-tasks pr-0 md:pr-3"></i
+                ><span
+                  class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block"
+                  >history</span
+                >
+              </a>
+            </li>
+            <li class="mr-3 flex-1">
+              <a
+                href="https://www.facebook.com/messages/t/100024246247552"
+                class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500"
+              >
+                <i class="fa fa-envelope pr-0 md:pr-3"></i
+                ><span
+                  class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block"
+                  >Messages</span
+                >
+              </a>
+            </li>
+
+            <li class="mr-3 flex-1">
+              <a
+                href="#"
+                class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500"
+              >
+                <i class="fa fa-wallet pr-0 md:pr-3"></i
+                ><span
+                  class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block"
+                  >User manual</span
+                >
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
+        <div class="bg-gray-800 pt-3">
+          <div
+            class="rounded-tl-3xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white"
+          ></div>
+        </div>
+
+        <div class="flex flex-wrap">
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card  1-->
+            <div
+              class="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-green-600">
+                    <i class="fa fa-heartbeat fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    heart rate node 1
+                  </h5>
+
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="heart_1">00</h3>
+                    <span class="text-red-400 ml-1">
+                      BMP <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card  2-->
+            <div
+              class="bg-gradient-to-b from-pink-200 to-pink-100 border-b-4 border-pink-500 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-pink-600">
+                    <i class="fas fa-tachometer-alt fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    Sp02 concentration
+                  </h5>
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="spo2_1" class="mr-1">00</h3>
+                    <span class="text-pink-500">% </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card  3-->
+            <div
+              class="bg-gradient-to-b from-red-400 to-red-100 border-b-4 border-red-500 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-red-400">
+                    <i class="fas fa-thermometer-half fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    body temperature
+                  </h5>
+
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="body_temp_1" class="mr-1">00</h3>
+                    <span class="text-indigo-700">°C</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card  4-->
+            <div
+              class="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-blue-600">
+                    <i class="fas fa-thermometer-half fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    room.temperature
+                  </h5>
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="Environment_temp_1" class="mr-1">00</h3>
+                    <span class="">°C</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card  5-->
+            <div
+              class="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-green-600">
+                    <i class="fa fa-heartbeat fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    heart rate node 2
+                  </h5>
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="heart_2">00</h3>
+                    <span class="text-red-400 ml-1">
+                      BMP <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card  6-->
+            <div
+              class="bg-gradient-to-b from-pink-200 to-pink-100 border-b-4 border-pink-500 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-pink-600">
+                    <!-- <i class="fas fa-users fa-2x fa-inverse"></i> -->
+                    <i class="fas fa-tachometer-alt fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    Sp02 concentration
+                  </h5>
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="spo2_2" class="mr-1">00</h3>
+                    <span class="text-pink-500">% </span>
+                  </div>
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card  7-->
+            <div
+              class="bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-500 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-red-500">
+                    <i class="fas fa-thermometer-half fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    body temperature
+                  </h5>
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="body_temp_2" class="mr-1">00</h3>
+                    <span class="text-indigo-700">°C</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+
+          <div class="w-full md:w-1/2 xl:w-1/4 p-6">
+            <!--Metric Card 8-->
+            <div
+              class="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5"
+            >
+              <div class="flex flex-row items-center">
+                <div class="flex-shrink pr-4">
+                  <div class="rounded-full p-5 bg-blue-600">
+                    <i class="fas fa-thermometer-half fa-2x fa-inverse"></i>
+                  </div>
+                </div>
+                <div class="flex-1 text-right md:text-center">
+                  <h5 class="font-bold uppercase text-gray-600">
+                    Room.temperature
+                  </h5>
+                  <div
+                    class="font-bold text-3xl flex justify-end lg:justify-center"
+                  >
+                    <h3 id="Environment_temp_2" class="mr-1">00</h3>
+                    <span class="text-indigo-700">°C</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/Metric Card-->
+          </div>
+        </div>
+
+
+
+
+
+        
+        <div class="flex flex-row flex-wrap flex-grow mt-2">
+
+
+          <div class="w-full md:w-1/2 xl:w-1/2 p-6">
+            <!--Graph Card-->
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+              <div
+                class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2"
+              >
+                <h5 class="font-bold uppercase text-gray-600">nhịp tim node 1</h5>
+              </div>
+              <div class="p-5">
+                <canvas
+                  id="chartjs-0"
+                  
+                  width="undefined"
+                  height="undefined"
+                ></canvas>
+              </div>
+            </div>
+            <!--/Graph Card-->
+          </div>
+
+
+
+          <div class="w-full md:w-1/2 xl:w-1/2 p-6">
+            <!--Graph Card-->
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+              <div
+                class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2"
+              >
+                <h5 class="font-bold uppercase text-gray-600">nhịp tim node 2</h5>
+              </div>
+              <div class="p-5">
+                <canvas
+                  id="chartjs-1"
+                  width="undefined"
+                  height="undefined"
+                ></canvas>
+              </div>
+            </div>
+            <!--/Graph Card-->
+          </div>
+          
+
+          <div class="w-full md:w-full xl:w-full p-6">
+            <!--Advert Card-->
+            <div class="bg-white border-transparent rounded-lg shadow-xl">
+              <div
+                class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2"
+              >
+                <h5 class="font-bold uppercase text-gray-600">CHÚ THÍCH THÔNG SỐ</h5>
+              </div>
+              <div class="p-5 font-medium">
+               <span class="text-lg"> Tiêu chuẩn nồng độ oxy trong máu và nhịp tim của người bình thường là bao nhiêu?</span> <br>
+               <span class="font-bold text-xl">  Nồng độ oxy trong máu (SpO2):</span>
+                <br>
+                <span  class="font-sans">
+                Trung bình, mức SpO2 cho người lớn là khoảng 95% đến 100% khi đo bằng oxymeter ngón tay.
+                Mức SpO2 dưới 90% thường được coi là mức độ thấp và có thể gây nguy hiểm cho sức khỏe.</span><br>
+               <span class="font-bold text-xl"> Nhịp tim:</span>
+               <br>
+               <span class="font-sans">
+                Nhịp tim bình thường cho người trưởng thành thường dao động trong khoảng từ 60 đến 100 nhịp/phút.
+                Nhịp tim có thể thay đổi tùy thuộc vào tình trạng sức khỏe, hoạt động vận động, cảm xúc và các yếu tố khác. </span>
+              </div>
+            </div>
+            <!--/Advert Card-->
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const $ = document.querySelector.bind(document)
+      const heart_1 = $("#heart_1")
+      const spo2_1 = $("#spo2_1")
+      const body_temp_1 = $("#body_temp_1")
+      const Environment_temp_1 = $("#Environment_temp_1")
+      const heart_2 = $("#heart_2")
+      const spo2_2 =$("#spo2_2")
+      const body_temp_2=$("#body_temp_2")
+      const Environment_temp_2=$("#Environment_temp_2")
+      const labels = [];
+      const dataValues = [];
+      const labels_2 = [];
+      const dataValues_2 = [];
+
+      function fetchData() {
+        fetch("http://127.0.0.1:3000/node")
+          .then((data) => {
+            return data.json();
+          })
+          .then((data) => {
+            console.log(data);
+            let data_1 = data.database_1.length - 1;
+            let data_2 = data.database_2.length - 1;
+
+            heart_1.innerText = data.database_1[data_1].heartbeat;
+            spo2_1.innerText = data.database_1[data_1].Spo2;
+            body_temp_1.innerText = data.database_1[data_1].body_temperature
+            Environment_temp_1.innerText = data.database_1[data_1].Environment_temp
+
+
+
+            heart_2.innerText = data.database_2[data_2].heartbeat;
+            spo2_2.innerText = data.database_2[data_2].Spo2;
+            body_temp_2.innerText = data.database_2[data_2].body_temperature
+            Environment_temp_2.innerText = data.database_2[data_2].Environment_temp
+          });
+      }
+
+
+               const myChart =  new Chart(document.getElementById("chartjs-1"), {
+                    type: "line",
+                    data: {
+                      labels: labels,
+                      datasets: [
+                        {
+                          label: "Data",
+                          data: dataValues,
+                          fill: false,
+                          borderColor: "rgb(75, 192, 192)",
+                          lineTension: 0.1, 
+                        },
+                      ],
+                    },
+                    options: {
+                      scales: {
+                         y: {
+                          beginAtZero: true
+                           }
+                         }
+                    }
+                  });
+
+
+       
+               const myChart_2 =  new Chart(document.getElementById("chartjs-0"), {
+                    type: "line",
+                    data: {
+                      labels: labels_2,
+                      datasets: [
+                        {
+                          label: "Data",
+                          data: dataValues_2,
+                          fill: false,
+                          borderColor: "rgb(75, 192, 192)",
+                          lineTension: 0.1, 
+                        },
+                      ],
+                    },
+                    options: {
+                      scales: {
+                         y: {
+                          beginAtZero: true
+                           }
+                         }
+                    }
+                  });
+
+   function addData_2(value) {
+            labels_2.push(new Date().toLocaleTimeString()); // Sử dụng thời gian hiện tại làm nhãn
+            dataValues_2.push(value);
+
+            // Giới hạn số lượng dữ liệu hiển thị trên biểu đồ (nếu muốn)
+            const maxDataPoints = 30;
+            if (labels_2.length > maxDataPoints) {
+                labels_2.shift();
+                dataValues_2.shift();
+            }
+
+            // Cập nhật dữ liệu cho biểu đồ
+            myChart_2.data.labels_2 = labels_2;
+            myChart_2.data.datasets[0].data = dataValues_2;
+
+            // Cập nhật biểu đồ
+            myChart_2.update();
+        }
+        function addData(value) {
+            labels.push(new Date().toLocaleTimeString()); // Sử dụng thời gian hiện tại làm nhãn
+            dataValues.push(value);
+
+            // Giới hạn số lượng dữ liệu hiển thị trên biểu đồ (nếu muốn)
+            const maxDataPoints = 30;
+            if (labels.length > maxDataPoints) {
+                labels.shift();
+                dataValues.shift();
+            }
+
+            // Cập nhật dữ liệu cho biểu đồ
+            myChart.data.labels = labels;
+            myChart.data.datasets[0].data = dataValues;
+
+            // Cập nhật biểu đồ
+            myChart.update();
+        }
+
+        // Giả định: Giá trị mới được thêm vào biểu đồ sau mỗi khoảng thời gian (ví dụ: 1 giây)
+        setInterval(() => {
+            // Giá trị mới (đây có thể là giá trị bạn nhận được từ dữ liệu thời gian thực)
+            const newValue =  Math.floor(Math.random() * (85 - 70 + 1)) + 70; // Giá trị ngẫu nhiên từ 0 đến 100
+            const newValue_2 = Math.floor(Math.random() * (80 - 75 + 1)) + 75;
+            // Thêm giá trị mới và cập nhật biểu đồ
+            addData(newValue);
+            addData_2(newValue_2);
+        }, 500); // Cập nhật giá trị mỗi giây
+
+
+      setInterval(fetchData, 100);
+    </script>
+  </body>
+</html>
